@@ -2,29 +2,20 @@ const mapbox = require('mapbox-gl');
 
 
 const iconUrls = {
-    hotels: 'http://i.imgur.com/D9574Cu.png',
-    restaurants: 'http://i.imgur.com/cqR6pUI.png',
-    activities: 'http://i.imgur.com/WbMOfMl.png'
+    hotels: 'url(http://i.imgur.com/D9574Cu.png)',
+    restaurants: 'url(http://i.imgur.com/cqR6pUI.png)',
+    activities: 'url(http://i.imgur.com/WbMOfMl.png)'
 }
 
 
-function buildMarker (activity, coords){
-    const map = new mapbox.Map({
-        container: "map",
-        center: [-74.009, 40.705], 
-        zoom: 12, // starting zoom
-        style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
-      });
-
+const buildMarker = function (activity, coords){
     const markerDomEl = document.createElement("div"); // Create a new, detached DIV
     markerDomEl.style.width = "32px";
     markerDomEl.style.height = "39px";
-    markerDomEl.style.backgroundImage = iconUrls[activity];
+    markerDomEl.style.backgroundImage =  iconUrls[activity];
 
-    console.log(`******* This is our icon URL: ${iconUrls[activity]}`);
-    
-    new mapbox.Marker(markerDomEl).setLngLat(coords).addTo(map);
-    
+    console.log(`******* This is our icon URL: ${iconUrls}`);
+      return new mapbox.Marker(markerDomEl).setLngLat(coords);
 }
 
 module.exports = buildMarker;
